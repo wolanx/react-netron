@@ -1,5 +1,8 @@
 name: my-pipeline
 
+permissions:
+  contents: write
+
 on:
   push:
     tags:
