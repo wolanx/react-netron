@@ -1,25 +1,45 @@
 # react-netron
 
-> Inspired by netron. In the react project and need to load the onnx file for display. So this project was created.
+> netron via react
 
+- Demo https://wolanx.github.io/react-netron
+- Docs https://wolanx.github.io/react-netron/docs/intro
 
-# Install
+# Intro
 
-`npm i @wolanx/react-netron`
+View Neural Network model with graphs.
 
-# Demo
- 
-- Homepage https://wolanx.github.io/react-netron/
+## Install
+
+```shell
+# https://www.npmjs.com/package/@wolanx/react-netron
+npm i @wolanx/react-netron
+```
+
+## Prepare file
+
+- download https://github.com/onnx/models/blob/main/vision/classification/mnist/model/mnist-12.onnx
+
+## Demo - open with button
 
 ```jsx
-// open with button
 export default function Demo1 () {
-    return <ReactOnnx width={1000} height={400} openSlot={<Button>Open Model...</Button>}/>
-}
+    const ref = useRef(null)
 
-// open with link
+    return (
+        <div>
+            <button onClick={() => ref.current?.open()}>Open Model...</button>
+            <ReactOnnx ref={ref} width={'100%'} height={600} file={null}/>
+        </div>
+    )
+}
+```
+
+## Demo - open with link
+
+```jsx
 export default function Demo2 () {
-    const file = useOnnx('/model/ann.onnx')
-    return <ReactOnnx width={1000} height={400} file={file}/>
+    const file = useOnnx('./model/demo.onnx')
+    return <ReactOnnx width={'100%'} height={600} file={file}/>
 }
 ```

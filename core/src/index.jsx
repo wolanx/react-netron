@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { BrowserHost } from './browser'
 import { View } from './view'
 import css from './index.module.scss'
 import { SvgMenu, SvgZoomIn, SvgZoomOut } from './icon'
 
-
-export function useOnnx(url) {
+export function useOnnx (url) {
     const [data, setData] = useState(null)
     useEffect(() => {
         console.log(url)
@@ -18,7 +17,7 @@ export function useOnnx(url) {
     return data
 }
 
-export default function ReactOnnx({ width, height, file, openSlot }) {
+const ReactOnnx = forwardRef(({ width, height, file }, ref) => {
     const refIns = useRef(null)
     const refFile = useRef(null)
 
@@ -34,11 +33,17 @@ export default function ReactOnnx({ width, height, file, openSlot }) {
         }
     }, [file])
 
-    function doOpen() {
+    useImperativeHandle(ref, () => {
+        return {
+            open: doOpen,
+        }
+    }, [])
+
+    function doOpen () {
         refFile.current?.click()
     }
 
-    function doLoadByFile({ target }) {
+    function doLoadByFile ({ target }) {
         const files = Array.from(target.files)
         const file = files[0]
         refIns.current?.openByFile(file, files)
@@ -47,7 +52,6 @@ export default function ReactOnnx({ width, height, file, openSlot }) {
     // onClick={doOpen}
     return (
         <>
-            {openSlot && React.cloneElement(openSlot, { onClick: doOpen })}
             <input ref={refFile} type="file" multiple={false} accept=".onnx" onChange={doLoadByFile}
                    style={{ display: 'none' }}/>
             <section className={css.onnxGraph} style={{ width: width || '100%', height: height || 400 }}>
@@ -80,4 +84,6 @@ export default function ReactOnnx({ width, height, file, openSlot }) {
             </section>
         </>
     )
-}
+})
+
+export default ReactOnnx

@@ -20,7 +20,7 @@ export class View {
             weights: true,
             attributes: false,
             names: false,
-            direction: 'vertical',
+            direction: 'horizontal',
             mousewheel: 'scroll',
         }
         this._options = Object.assign({}, this._defaultOptions)
@@ -209,7 +209,7 @@ export class View {
         }
 
         let buffer = await blob.arrayBuffer()
-        console.log(buffer)
+        // console.log(buffer)
         this.open(new _BlobCtn(buffer))
     }
 

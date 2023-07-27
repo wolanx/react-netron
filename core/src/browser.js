@@ -7,9 +7,7 @@ export class BrowserHost {
         this._navigator = window.navigator
         this._document = window.document
         this._telemetry = new base.Telemetry(this._window)
-        this._window.eval = () => {
-            throw new Error('window.eval() not supported.')
-        }
+
         this._meta = {}
         for (const element of Array.from(this._document.getElementsByTagName('meta'))) {
             if (element.name !== undefined && element.content !== undefined) {
@@ -84,10 +82,6 @@ export class BrowserHost {
         }
         const telemetry = async () => {
             if (this._environment.packaged) {
-                this._window.addEventListener('error', (event) => {
-                    const error = event instanceof ErrorEvent && event.error && event.error instanceof Error ? event.error : new Error(event && event.message ? event.message : JSON.stringify(event))
-                    this.exception(error, true)
-                })
                 const ga4 = async () => {
                     const measurement_id = '848W2NVWVH'
                     const user = this._getCookie('_ga').replace(/^(GA1\.\d\.)*/, '')
