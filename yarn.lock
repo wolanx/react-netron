@@ -2365,6 +2365,11 @@
     "@webassemblyjs/ast" "1.11.6"
     "@xtuc/long" "4.2.2"
 
+"@wolanx/react-netron@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/@wolanx/react-netron/-/react-netron-1.0.5.tgz#37b5403d3c989f0c3b3aa325ce5ccafcf2f24bf5"
+  integrity sha512-oe5rMpAPTDaQ8qaOF9WQyse+X1DONeGfWVY5TXdMnEXBwyTxgBY+RWO7+dyogo5ZoVXEuQx7zy/jJ34wvWT4Ww==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
