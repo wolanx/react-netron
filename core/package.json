@@ -1,0 +1,34 @@
+{
+  "name": "@wolanx/react-netron",
+  "version": "1.0.1",
+  "keywords": [
+    "netron",
+    "onnx"
+  ],
+  "description": "view onnx file",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "publish": "npm publish --access public"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.17",
+    "esbuild-css-modules-plugin": "^2.7.1",
+    "esbuild-sass-plugin": "^2.10.0"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "author": "https://github.com/wolanx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wolanx/react-netron"
+  },
+  "license": "MIT"
+}
