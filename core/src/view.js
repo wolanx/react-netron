@@ -189,6 +189,29 @@ export class View {
         }
     }
 
+    setDirection(direction) {
+        if (direction !== 'vertical' && direction !== 'horizontal') {
+            throw new view.Error('Invalid direction. Must be "vertical" or "horizontal".')
+        }
+        if (this._options.direction !== direction) {
+            this._options.direction = direction
+            this._reload()
+            // Persist the setting
+            const options = {}
+            for (const entry of Object.entries(this._options)) {
+                const name = entry[0]
+                if (this._defaultOptions[name] !== entry[1]) {
+                    options[name] = entry[1]
+                }
+            }
+            if (Object.entries(options).length == 0) {
+                this._host.delete('configuration', 'options')
+            } else {
+                this._host.set('configuration', 'options', options)
+            }
+        }
+    }
+
     openByFile(file, files) {
         this._host._open(file, files)
     }
@@ -748,9 +771,9 @@ export class View {
             if (nodes.length > 2048) {
                 if (!this._host.confirm('Large model detected.', 'This graph contains a large number of nodes and might take a long time to render. Do you want to continue?')) {
                     this._host.event('graph_view', {
-                            graph_node_count: nodes.length,
-                            graph_skip: 1,
-                        },
+                        graph_node_count: nodes.length,
+                        graph_skip: 1,
+                    },
                     )
                     this.show(null)
                     return null
